@@ -24,6 +24,10 @@ const LoginScreen = () => {
     navigation.navigate('Register');
   };
 
+  const onSignIn = () => {
+    navigation.navigate('Main');
+  };
+
   return (
     <ImageBackground source={landingImg} style={styles.bgImage}>
       <SafeAreaView />
@@ -74,7 +78,7 @@ const LoginScreen = () => {
         </View>
         <View style={styles.footerContainer}>
           <View style={styles.buttonViews}>
-            <AppButton title="Sign In" />
+            <AppButton title="Sign In" onPress={onSignIn} />
           </View>
           <View style={styles.haveAccountContainer}>
             <Text style={styles.loginButtonText}>Don't have an account?</Text>

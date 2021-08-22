@@ -1,10 +1,10 @@
 import React from 'react';
 import HomeScreen from '../screens/Home/Home';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
-const StackNavigator = () => {
+const HomeStackNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} />
@@ -12,4 +12,4 @@ const StackNavigator = () => {
   );
 };
 
-export default StackNavigator;
+export default HomeStackNavigator;
