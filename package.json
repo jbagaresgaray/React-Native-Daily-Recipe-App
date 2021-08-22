@@ -10,6 +10,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4.0.0-alpha.29",
+    "@klarna/react-native-vector-drawable": "^0.3.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/drawer": "5.x",
     "@react-navigation/native": "5.x",
@@ -17,11 +19,15 @@
     "react": "17.0.2",
     "react-native": "0.64.2",
     "react-native-elements": "^3.4.2",
+    "react-native-fast-image": "^8.3.7",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-ratings": "^8.1.0",
     "react-native-reanimated": "^2.2.0",
     "react-native-safe-area-context": "^3.3.0",
     "react-native-screens": "^3.5.0",
-    "react-native-vector-icons": "^8.1.0"
+    "react-native-svg": "^12.1.1",
+    "react-native-vector-icons": "^8.1.0",
+    "react-native-vector-image": "^0.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -32,6 +38,7 @@
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.66.0",
     "react-native-codegen": "^0.0.7",
+    "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "17.0.1"
   },
   "jest": {

@@ -28,6 +28,12 @@
 		4E631D9F89CA432B92290D41 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D317734E128245D4BB449516 /* Octicons.ttf */; };
 		61B24CBC14EB4DC9AAEC3C7E /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F41D778973C466F8970BBE0 /* SimpleLineIcons.ttf */; };
 		CC0204FF74EF42AA9F000F22 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA71F27EC053443C805E4B5E /* Zocial.ttf */; };
+		3F57450209E8482BB2C645B6 /* AbrilFatface-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7079430E5794F85956167F8 /* AbrilFatface-Regular.ttf */; };
+		4BE17A88A86B461F83985340 /* Hellix-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4069910FC13248C7968AA1B1 /* Hellix-Bold.ttf */; };
+		1246D5B86861426EABC33AE2 /* Hellix-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCB9A364AE4C4D08AFA9E542 /* Hellix-ExtraBold.ttf */; };
+		15B3BFC0C126419297EB30C0 /* Hellix-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C358CC2A9F54049BCA43F88 /* Hellix-Medium.ttf */; };
+		2235D08ECC5F4D8EA698BA92 /* Hellix-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5B4A24E328349029E7DCFDF /* Hellix-Regular.ttf */; };
+		57D6FB0756F74825A1CC205D /* Hellix-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1B0E086F65C4B3BA16A1BD7 /* Hellix-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +74,12 @@
 		D317734E128245D4BB449516 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		0F41D778973C466F8970BBE0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		EA71F27EC053443C805E4B5E /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F7079430E5794F85956167F8 /* AbrilFatface-Regular.ttf */ = {isa = PBXFileReference; name = "AbrilFatface-Regular.ttf"; path = "../src/assets/fonts/AbrilFatface-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4069910FC13248C7968AA1B1 /* Hellix-Bold.ttf */ = {isa = PBXFileReference; name = "Hellix-Bold.ttf"; path = "../src/assets/fonts/Hellix-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FCB9A364AE4C4D08AFA9E542 /* Hellix-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Hellix-ExtraBold.ttf"; path = "../src/assets/fonts/Hellix-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3C358CC2A9F54049BCA43F88 /* Hellix-Medium.ttf */ = {isa = PBXFileReference; name = "Hellix-Medium.ttf"; path = "../src/assets/fonts/Hellix-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E5B4A24E328349029E7DCFDF /* Hellix-Regular.ttf */ = {isa = PBXFileReference; name = "Hellix-Regular.ttf"; path = "../src/assets/fonts/Hellix-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C1B0E086F65C4B3BA16A1BD7 /* Hellix-SemiBold.ttf */ = {isa = PBXFileReference; name = "Hellix-SemiBold.ttf"; path = "../src/assets/fonts/Hellix-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +188,12 @@
 				D317734E128245D4BB449516 /* Octicons.ttf */,
 				0F41D778973C466F8970BBE0 /* SimpleLineIcons.ttf */,
 				EA71F27EC053443C805E4B5E /* Zocial.ttf */,
+				F7079430E5794F85956167F8 /* AbrilFatface-Regular.ttf */,
+				4069910FC13248C7968AA1B1 /* Hellix-Bold.ttf */,
+				FCB9A364AE4C4D08AFA9E542 /* Hellix-ExtraBold.ttf */,
+				3C358CC2A9F54049BCA43F88 /* Hellix-Medium.ttf */,
+				E5B4A24E328349029E7DCFDF /* Hellix-Regular.ttf */,
+				C1B0E086F65C4B3BA16A1BD7 /* Hellix-SemiBold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -287,6 +305,12 @@
 				4E631D9F89CA432B92290D41 /* Octicons.ttf in Resources */,
 				61B24CBC14EB4DC9AAEC3C7E /* SimpleLineIcons.ttf in Resources */,
 				CC0204FF74EF42AA9F000F22 /* Zocial.ttf in Resources */,
+				3F57450209E8482BB2C645B6 /* AbrilFatface-Regular.ttf in Resources */,
+				4BE17A88A86B461F83985340 /* Hellix-Bold.ttf in Resources */,
+				1246D5B86861426EABC33AE2 /* Hellix-ExtraBold.ttf in Resources */,
+				15B3BFC0C126419297EB30C0 /* Hellix-Medium.ttf in Resources */,
+				2235D08ECC5F4D8EA698BA92 /* Hellix-Regular.ttf in Resources */,
+				57D6FB0756F74825A1CC205D /* Hellix-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

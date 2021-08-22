@@ -1,84 +1,89 @@
-import React from 'react';
+import {useNavigation} from '@react-navigation/core';
+import React, {useLayoutEffect} from 'react';
 import {
   View,
   Text,
-  ImageBackground,
   SafeAreaView,
   StyleSheet,
-  TouchableOpacity,
-  ScrollView,
+  StatusBar,
+  Dimensions,
 } from 'react-native';
 
-import landingImg from '../../assets/img/bg.png';
-import AppButton from '../../components/AppButton/AppButton';
-import AppHeaderLogo from '../../components/AppHeaderLogo/AppHeaderLogo';
+import AppMenuButton from '../../components/AppMenuButton/AppMenuButton';
+import AppNotificationButton from '../../components/AppNotificationButton/AppNotificationButton';
+import AppSearchBar from '../../components/AppSearchBar/AppSearchBar';
 import {COLORS} from '../../styles/color';
+import {
+  FONT_PRIMARY_MEDIUM,
+  FONT_SECONDARY_REGULAR,
+} from '../../styles/typography';
+import Recommended from './Recommended';
+import TodaysRecipe from './TodaysRecipe';
+
+import LatestMealsArr from '../../api/fake/latest_meals.json';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => <AppMenuButton />,
+      headerRight: () => <AppNotificationButton />,
+    });
+  }, [navigation]);
+
   return (
-    <ImageBackground source={landingImg} style={styles.bgImage}>
-      <SafeAreaView />
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <View style={styles.contentContainer}>
-          <AppHeaderLogo />
-          <Text style={styles.logoText}>Cooking Done The Easy Way</Text>
+    <>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView style={styles.saferAreaView}>
+        <View style={styles.introContainer}>
+          <Text style={styles.introUserText}>Bonjour, Emma</Text>
+          <Text style={styles.introCaption} numberOfLines={2}>
+            What would you like to cook {'\n'} today?
+          </Text>
         </View>
-        <View style={styles.footerContainer}>
-          <View style={styles.buttonViews}>
-            <AppButton title="Sign In" />
-          </View>
-          <View style={styles.haveAccountContainer}>
-            <TouchableOpacity>
-              <Text style={styles.loginButtonText}>
-                Don't have an account? Register.
-              </Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.searchBarContainer}>
+          <AppSearchBar />
         </View>
-      </ScrollView>
-    </ImageBackground>
+        <TodaysRecipe meals={LatestMealsArr.meals} />
+        <Recommended />
+      </SafeAreaView>
+    </>
   );
 };
 
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  bgImage: {
-    width: '100%',
-    height: '100%',
-  },
-  scrollView: {
+  saferAreaView: {
     flex: 1,
-    paddingStart: 24,
-    paddingEnd: 24,
+    backgroundColor: COLORS.white,
+    paddingStart: 30,
+    paddingEnd: 30,
   },
-  contentContainer: {
-    flex: 1,
-    paddingTop: 32,
+  introContainer: {
+    paddingTop: 24,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
-  logoText: {
-    marginTop: 14,
+  introUserText: {
+    fontSize: 12,
+    lineHeight: 16,
     color: COLORS.lightGrey,
-    fontSize: 14,
-    lineHeight: 18,
-    fontWeight: '400',
+    paddingBottom: 3,
+    fontFamily: FONT_PRIMARY_MEDIUM,
   },
-  footerContainer: {
-    marginBottom: 32,
-    paddingStart: 16,
-    paddingEnd: 16,
+  introCaption: {
+    fontSize: 20,
+    lineHeight: 28,
+    color: COLORS.black,
+    paddingTop: 3,
+    paddingBottom: 3,
+    fontFamily: FONT_SECONDARY_REGULAR,
   },
-  haveAccountContainer: {
-    marginTop: 32,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  loginButtonText: {
-    paddingLeft: 6,
-    fontSize: 16,
-    color: COLORS.white,
-    fontWeight: '500',
+  searchBarContainer: {
+    paddingTop: 16,
+    paddingBottom: 16,
+    width: Dimensions.get('window').width - 100,
   },
 });
