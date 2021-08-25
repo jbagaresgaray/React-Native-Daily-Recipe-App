@@ -20,7 +20,7 @@ const AppSearchBar = () => {
           <Icon
             name="options-outline"
             type="ionicon"
-            size={18}
+            size={21}
             color={COLORS.black}
           />
         }
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     marginLeft: 0,
     paddingStart: 0,
-    marginRight: 8,
+    // marginRight: 8,
     // width: 265,
   },
   searchInputContainer: {

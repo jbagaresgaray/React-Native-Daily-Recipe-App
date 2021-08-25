@@ -7,6 +7,7 @@ import {
   StyleSheet,
   StatusBar,
   Dimensions,
+  ScrollView,
 } from 'react-native';
 
 import AppMenuButton from '../../components/AppMenuButton/AppMenuButton';
@@ -36,17 +37,20 @@ const HomeScreen = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.saferAreaView}>
-        <View style={styles.introContainer}>
-          <Text style={styles.introUserText}>Bonjour, Emma</Text>
-          <Text style={styles.introCaption} numberOfLines={2}>
-            What would you like to cook {'\n'} today?
-          </Text>
-        </View>
-        <View style={styles.searchBarContainer}>
-          <AppSearchBar />
-        </View>
-        <TodaysRecipe meals={LatestMealsArr.meals} />
-        <Recommended />
+        <ScrollView>
+          <View style={styles.introContainer}>
+            <Text style={styles.introUserText}>Bonjour, Emma</Text>
+            <Text style={styles.introCaption} numberOfLines={2}>
+              What would you like to cook {'\n'} today?
+            </Text>
+          </View>
+          <View style={styles.searchBarContainer}>
+            <AppSearchBar />
+          </View>
+          <TodaysRecipe meals={LatestMealsArr.meals} />
+          <View style={styles.borderLine} />
+          <Recommended meals={LatestMealsArr.meals} />
+        </ScrollView>
       </SafeAreaView>
     </>
   );
@@ -85,5 +89,11 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 16,
     width: Dimensions.get('window').width - 100,
+  },
+  borderLine: {
+    height: 1,
+    backgroundColor: COLORS.superLight,
+    marginTop: 16,
+    marginBottom: 16,
   },
 });

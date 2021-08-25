@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {AirbnbRating} from 'react-native-ratings';
+import {AirbnbRating} from 'react-native-elements';
 import PropTypes from 'prop-types';
 
 import {COLORS} from '../../styles/color';
@@ -34,16 +34,16 @@ const AppRecipeCard = ({category, meal, area, image}) => {
         <Text style={styles.AppRecipeCardMeal} numberOfLines={2}>
           {meal}
         </Text>
-        <AirbnbRating
-          showRating={false}
-          defaultRating={3}
-          count={5}
-          size={10}
-          selectedColor={COLORS.orange}
-          unSelectedColor={COLORS.lightGrey}
-          ratingContainerStyle={styles.AppRecipeCardRating}
-          starContainerStyle={styles.AppRecipeCardRatingStar}
-        />
+        <View style={styles.AppRecipeCardRating}>
+          <AirbnbRating
+            showRating={false}
+            defaultRating={3}
+            count={5}
+            size={10}
+            selectedColor={COLORS.orange}
+            unSelectedColor={COLORS.lightGrey}
+          />
+        </View>
         <Text style={styles.AppRecipeCardCalories}>{area}</Text>
         <View style={styles.AppRecipeCardFooter}>
           <AppTextIcon label="10 mins" icon="time-outline" />
@@ -54,7 +54,7 @@ const AppRecipeCard = ({category, meal, area, image}) => {
   );
 };
 
-PropTypes.propTypes = {
+AppRecipeCard.propTypes = {
   category: PropTypes.string,
   meal: PropTypes.string,
   area: PropTypes.string,
@@ -113,9 +113,6 @@ const styles = StyleSheet.create({
   },
   AppRecipeCardRating: {
     alignSelf: 'flex-start',
-  },
-  AppRecipeCardRatingStar: {
-    // backgroundColor: 'red',
   },
   AppRecipeCardFooter: {
     flexDirection: 'row',

@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   footerContainer: {
-    marginBottom: 32,
+    marginBottom: 64,
     paddingStart: 16,
     paddingEnd: 16,
   },
