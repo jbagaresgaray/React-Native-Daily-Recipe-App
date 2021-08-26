@@ -1,7 +1,8 @@
 import React from 'react';
-import HomeScreen from '../screens/Home/Home';
 import {createStackNavigator} from '@react-navigation/stack';
-import {COLORS} from '../styles/color';
+import {COLORS} from '../../styles/color';
+
+import FavoriteScreen from '../../screens/Favorite';
 
 const Stack = createStackNavigator();
 const navigationOptions = {
@@ -14,12 +15,14 @@ const navigationOptions = {
   headerTitle: null,
 };
 
-const HomeStackNavigator = () => {
+const FavoriteStackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Home" screenOptions={navigationOptions}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Navigator
+      initialRouteName="FavoriteScreen"
+      screenOptions={navigationOptions}>
+      <Stack.Screen name="FavoriteScreen" component={FavoriteScreen} />
     </Stack.Navigator>
   );
 };
 
-export default HomeStackNavigator;
+export default FavoriteStackNavigator;

@@ -3,10 +3,12 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {COLORS} from '../../styles/color';
 import {FONT_PRIMARY_MEDIUM} from '../../styles/typography';
 
-const AppTextSeeAll = ({onPress}) => {
+const AppTextSeeAll = ({onPress, label}) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <Text style={styles.textStyle}>See All</Text>
+      <Text style={styles.textStyle}>
+        {label !== undefined ? label : 'See All'}
+      </Text>
     </TouchableOpacity>
   );
 };
