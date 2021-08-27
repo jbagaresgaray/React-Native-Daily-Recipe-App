@@ -1,32 +1,43 @@
-import React from 'react';
+import React, {createRef} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button, Icon, Input} from 'react-native-elements';
+import FilterModalScreen from '../../screens/FilterModal';
 import {COLORS} from '../../styles/color';
 import {FONT_PRIMARY_REGULAR} from '../../styles/typography';
 
 const AppSearchBar = () => {
+  const bottomSheetRef = createRef();
+
+  const onOpenFilter = () => {
+    bottomSheetRef.current.show();
+  };
+
   return (
-    <View style={styles.searchBarContainer}>
-      <Input
-        placeholder="Search for recipes"
-        leftIcon={{type: 'evilicon', name: 'search', color: COLORS.lightGrey}}
-        placeholderTextColor={COLORS.lightGrey}
-        inputStyle={styles.searchInput}
-        inputContainerStyle={styles.searchInputContainer}
-        containerStyle={styles.searchContainer}
-      />
-      <Button
-        icon={
-          <Icon
-            name="options-outline"
-            type="ionicon"
-            size={21}
-            color={COLORS.black}
-          />
-        }
-        buttonStyle={styles.searchButtonStyle}
-      />
-    </View>
+    <>
+      <View style={styles.searchBarContainer}>
+        <Input
+          placeholder="Search for recipes"
+          leftIcon={{type: 'evilicon', name: 'search', color: COLORS.lightGrey}}
+          placeholderTextColor={COLORS.lightGrey}
+          inputStyle={styles.searchInput}
+          inputContainerStyle={styles.searchInputContainer}
+          containerStyle={styles.searchContainer}
+        />
+        <Button
+          onPress={onOpenFilter}
+          icon={
+            <Icon
+              name="options-outline"
+              type="ionicon"
+              size={21}
+              color={COLORS.black}
+            />
+          }
+          buttonStyle={styles.searchButtonStyle}
+        />
+      </View>
+      <FilterModalScreen bottomSheetRef={bottomSheetRef} />
+    </>
   );
 };
 
