@@ -7,4 +7,5 @@ export const COLORS = {
   lightGrey: '#B2B7C6',
   superLight: '#F7F8FC',
   darkGrey: '#D8DAE4',
+  badge: '#E1E3E9',
 };

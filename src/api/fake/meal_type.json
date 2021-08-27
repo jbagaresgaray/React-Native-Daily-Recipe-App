@@ -1,0 +1,16 @@
+{
+  "types": [
+    {
+      "strType": "Breakfast"
+    },
+    {
+      "strType": "Brunch"
+    },
+    {
+      "strType": "Lunch"
+    },
+    {
+      "strType": "Dinner"
+    }
+  ]
+}
