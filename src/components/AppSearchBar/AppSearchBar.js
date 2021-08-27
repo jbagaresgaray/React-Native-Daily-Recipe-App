@@ -9,7 +9,8 @@ const AppSearchBar = () => {
   const bottomSheetRef = createRef();
 
   const onOpenFilter = () => {
-    bottomSheetRef.current.show();
+    console.log('onOpenFilter');
+    bottomSheetRef.current.setModalVisible();
   };
 
   return (

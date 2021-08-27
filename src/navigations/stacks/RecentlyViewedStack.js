@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {COLORS} from '../../styles/color';
 
 import RecentlyViewedScreen from '../../screens/RecentlyViewed';
+import NotificationsScreen from '../../screens/Notifications';
 
 const Stack = createStackNavigator();
 const navigationOptions = {
@@ -24,6 +25,7 @@ const RecentlyViewedStackNavigator = () => {
         name="RecentlyViewedScreen"
         component={RecentlyViewedScreen}
       />
+      <Stack.Screen name="Notification" component={NotificationsScreen} />
     </Stack.Navigator>
   );
 };

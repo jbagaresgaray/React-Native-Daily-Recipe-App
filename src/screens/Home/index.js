@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
   saferAreaView: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingStart: 30,
-    paddingEnd: 30,
+    paddingStart: 20,
+    paddingEnd: 20,
   },
   introContainer: {
     paddingTop: 24,

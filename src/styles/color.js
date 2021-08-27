@@ -9,4 +9,5 @@ export const COLORS = {
   darkGrey: '#D8DAE4',
   badge: '#E1E3E9',
   sliderUnselect: '#EEEFF3',
+  notificationText: '#70737C',
 };

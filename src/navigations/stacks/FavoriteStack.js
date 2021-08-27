@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {COLORS} from '../../styles/color';
 
 import FavoriteScreen from '../../screens/Favorite';
+import NotificationsScreen from '../../screens/Notifications';
 
 const Stack = createStackNavigator();
 const navigationOptions = {
@@ -21,6 +22,7 @@ const FavoriteStackNavigator = () => {
       initialRouteName="FavoriteScreen"
       screenOptions={navigationOptions}>
       <Stack.Screen name="FavoriteScreen" component={FavoriteScreen} />
+      <Stack.Screen name="Notification" component={NotificationsScreen} />
     </Stack.Navigator>
   );
 };

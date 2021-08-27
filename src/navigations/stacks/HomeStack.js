@@ -2,6 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../../screens/Home';
 import {COLORS} from '../../styles/color';
+import NotificationsScreen from '../../screens/Notifications';
 
 const Stack = createStackNavigator();
 const navigationOptions = {
@@ -20,6 +21,7 @@ const HomeStackNavigator = () => {
       initialRouteName="HomeScreen"
       screenOptions={navigationOptions}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="Notification" component={NotificationsScreen} />
     </Stack.Navigator>
   );
 };
