@@ -8,4 +8,5 @@ export const COLORS = {
   superLight: '#F7F8FC',
   darkGrey: '#D8DAE4',
   badge: '#E1E3E9',
+  sliderUnselect: '#EEEFF3',
 };
