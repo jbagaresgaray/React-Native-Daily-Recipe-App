@@ -33,6 +33,12 @@ const HomeScreen = () => {
     });
   }, [navigation]);
 
+  const navigateRecipe = recipe => {
+    navigation.navigate('Recipe', {
+      recipe,
+    });
+  };
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -47,9 +53,15 @@ const HomeScreen = () => {
           <View style={styles.searchBarContainer}>
             <AppSearchBar />
           </View>
-          <TodaysRecipe meals={LatestMealsArr.meals} />
+          <TodaysRecipe
+            meals={LatestMealsArr.meals}
+            navigateRecipe={navigateRecipe}
+          />
           <View style={styles.borderLine} />
-          <Recommended meals={LatestMealsArr.meals} />
+          <Recommended
+            meals={LatestMealsArr.meals}
+            navigateRecipe={navigateRecipe}
+          />
         </ScrollView>
       </SafeAreaView>
     </>

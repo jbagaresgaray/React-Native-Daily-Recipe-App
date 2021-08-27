@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import AppTextHeader from '../../components/AppTextHeader/AppTextHeader';
 import AppRecipeCard from '../../components/AppRecipeCard/AppRecipeCard';
 
-const TodaysRecipe = ({meals}) => {
+const TodaysRecipe = ({meals, navigateRecipe}) => {
   const renderItem = ({item, index}) => {
     return (
       <AppRecipeCard
@@ -14,6 +14,7 @@ const TodaysRecipe = ({meals}) => {
         category={item.strCategory}
         area={item.strArea}
         image={item.strMealThumb}
+        onPress={() => navigateRecipe(item)}
       />
     );
   };
@@ -33,6 +34,7 @@ const TodaysRecipe = ({meals}) => {
 
 TodaysRecipe.propTypes = {
   meals: PropTypes.array,
+  navigateRecipe: PropTypes.func,
 };
 
 const styles = StyleSheet.create({

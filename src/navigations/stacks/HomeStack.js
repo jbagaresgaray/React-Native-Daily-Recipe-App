@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../../screens/Home';
 import {COLORS} from '../../styles/color';
 import NotificationsScreen from '../../screens/Notifications';
+import RecipeScreen from '../../screens/Recipe';
 
 const Stack = createStackNavigator();
 const navigationOptions = {
@@ -22,6 +23,7 @@ const HomeStackNavigator = () => {
       screenOptions={navigationOptions}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="Notification" component={NotificationsScreen} />
+      <Stack.Screen name="Recipe" component={RecipeScreen} />
     </Stack.Navigator>
   );
 };

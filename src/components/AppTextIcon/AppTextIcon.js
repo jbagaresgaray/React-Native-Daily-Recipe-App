@@ -8,7 +8,7 @@ const AppTextIcon = ({label, icon, size, textStyle}) => {
   return (
     <View style={styles.container}>
       <Icon name={icon} size={size} color={COLORS.lightGrey} />
-      <Text style={StyleSheet.flatten([textStyle, styles.textStyle])}>
+      <Text style={StyleSheet.flatten([styles.textStyle, textStyle])}>
         {label}
       </Text>
     </View>

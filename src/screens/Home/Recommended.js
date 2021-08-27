@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import AppTextHeader from '../../components/AppTextHeader/AppTextHeader';
 import AppRecipeItem from '../../components/AppRecipeItem/AppRecipeItem';
 
 const Recommended = props => {
-  const {meals} = props;
+  const {meals, navigateRecipe} = props;
 
   return (
     <View style={styles.RecommendedContainer}>
@@ -18,6 +18,7 @@ const Recommended = props => {
             category={item.strCategory}
             area={item.strArea}
             image={item.strMealThumb}
+            onPress={() => navigateRecipe(item)}
           />
         ))}
     </View>
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
 
 Recommended.propTypes = {
   meals: PropTypes.array,
+  navigateRecipe: PropTypes.func,
 };
 
 export default Recommended;

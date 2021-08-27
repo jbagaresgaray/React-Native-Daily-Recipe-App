@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {AirbnbRating} from 'react-native-elements';
 import PropTypes from 'prop-types';
@@ -12,9 +12,12 @@ import {
 import AppLoveButton from '../AppLoveButton/AppLoveButton';
 import AppTextIcon from '../AppTextIcon/AppTextIcon';
 
-const AppRecipeCard = ({category, meal, area, image}) => {
+const AppRecipeCard = ({category, meal, area, image, onPress}) => {
   return (
-    <View style={styles.AppRecipeCard}>
+    <TouchableOpacity
+      style={styles.AppRecipeCard}
+      onPress={onPress}
+      activeOpacity={0.8}>
       <View style={styles.AppRecipeCardMedia}>
         <View style={styles.AppRecipeCardLoveButton}>
           <AppLoveButton />
@@ -50,7 +53,7 @@ const AppRecipeCard = ({category, meal, area, image}) => {
           <AppTextIcon label="1 Serving" icon="fast-food-outline" />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -59,6 +62,7 @@ AppRecipeCard.propTypes = {
   meal: PropTypes.string,
   area: PropTypes.string,
   image: PropTypes.string,
+  onPress: PropTypes.func,
 };
 
 export default AppRecipeCard;

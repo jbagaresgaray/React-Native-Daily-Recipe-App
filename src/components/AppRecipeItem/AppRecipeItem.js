@@ -12,10 +12,13 @@ import AppTextIcon from '../AppTextIcon/AppTextIcon';
 import AppLoveButton from '../AppLoveButton/AppLoveButton';
 
 const AppRecipeItem = props => {
-  const {category, meal, area, image} = props;
+  const {category, meal, area, image, onPress} = props;
 
   return (
-    <ListItem containerStyle={styles.ListItemContainer}>
+    <ListItem
+      containerStyle={styles.ListItemContainer}
+      underlayColor={'transparent'}
+      onPress={onPress}>
       <FastImage
         style={styles.AppRecipeCardImage}
         source={{
@@ -58,6 +61,7 @@ AppRecipeItem.propTypes = {
   meal: PropTypes.string,
   area: PropTypes.string,
   image: PropTypes.string,
+  onPress: PropTypes.func,
 };
 
 export default AppRecipeItem;
