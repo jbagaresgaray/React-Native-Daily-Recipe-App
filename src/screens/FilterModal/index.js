@@ -28,93 +28,95 @@ const FilterModalScreen = ({bottomSheetRef}) => {
 
   const renderContent = () => {
     return (
-      <ScrollView
-        nestedScrollEnabled
-        contentContainerStyle={styles.saferAreaView}>
-        <View style={styles.introContainer}>
-          <Text style={styles.introCaption} numberOfLines={2}>
-            Filter
-          </Text>
-          <AppTextSeeAll label="Reset" />
-        </View>
-        <View>
-          <Text style={styles.headerCaption}>Meal</Text>
-          <View style={styles.badgeContainer}>
-            {MealsArr &&
-              MealsArr.map((item, index) => {
-                return <AppBadge label={item.strType} key={index} />;
-              })}
-          </View>
-        </View>
-        <View style={styles.borderLine} />
-        <View>
-          <Text style={styles.headerCaption}>Course</Text>
-          <View style={styles.badgeContainer}>
-            {CoursesArr &&
-              CoursesArr.map((item, index) => {
-                return <AppBadge label={item.strCategory} key={index} />;
-              })}
-          </View>
-        </View>
-        <View style={styles.borderLine} />
-        <View style={styles.sliderContainer}>
+      <>
+        <ScrollView
+          nestedScrollEnabled
+          contentContainerStyle={styles.saferAreaView}>
           <View style={styles.introContainer}>
-            <Text style={styles.headerCaption}>Serving</Text>
-            <AppTextSeeAll label="Set Manually" />
+            <Text style={styles.introCaption} numberOfLines={2}>
+              Filter
+            </Text>
+            <AppTextSeeAll label="Reset" />
           </View>
-          <AppSlider
-            showStepLabels
-            isMarkersSeparated
-            values={[2, 4]}
-            max={10}
-            sliderLength={SliderWidth}
-          />
-        </View>
-        <View style={styles.sliderContainer}>
-          <View style={styles.introContainer}>
-            <Text style={styles.headerCaption}>Preparation Time</Text>
-            <AppTextSeeAll label="Set Manually" />
+          <View>
+            <Text style={styles.headerCaption}>Meal</Text>
+            <View style={styles.badgeContainer}>
+              {MealsArr &&
+                MealsArr.map((item, index) => {
+                  return <AppBadge label={item.strType} key={index} />;
+                })}
+            </View>
           </View>
-          <AppSlider
-            showStepLabels
-            isMarkersSeparated
-            valueSuffix="mins"
-            values={[5, 20]}
-            max={60}
-            sliderLength={SliderWidth}
-          />
-        </View>
-        <View style={styles.sliderContainer}>
-          <View style={styles.introContainer}>
-            <Text style={styles.headerCaption}>Calories</Text>
-            <AppTextSeeAll label="Set Manually" />
+          <View style={styles.borderLine} />
+          <View>
+            <Text style={styles.headerCaption}>Course</Text>
+            <View style={styles.badgeContainer}>
+              {CoursesArr &&
+                CoursesArr.map((item, index) => {
+                  return <AppBadge label={item.strCategory} key={index} />;
+                })}
+            </View>
           </View>
-          <AppSlider
-            showSteps
-            isMarkersSeparated
-            values={[0, 500]}
-            max={2000}
-            valueSuffix="cal"
-            sliderLength={SliderWidth}
-          />
-        </View>
-        <View style={styles.ratingContainer}>
-          <View style={styles.introContainer}>
-            <Text style={styles.headerCaption}>Rating</Text>
+          <View style={styles.borderLine} />
+          <View style={styles.sliderContainer}>
+            <View style={styles.introContainer}>
+              <Text style={styles.headerCaption}>Serving</Text>
+              <AppTextSeeAll label="Set Manually" />
+            </View>
+            <AppSlider
+              showStepLabels
+              isMarkersSeparated
+              values={[2, 4]}
+              max={10}
+              sliderLength={SliderWidth}
+            />
           </View>
-          <AirbnbRating
-            showRating={false}
-            defaultRating={3}
-            count={5}
-            size={20}
-            selectedColor={COLORS.orange}
-            unSelectedColor={COLORS.lightGrey}
-          />
-        </View>
+          <View style={styles.sliderContainer}>
+            <View style={styles.introContainer}>
+              <Text style={styles.headerCaption}>Preparation Time</Text>
+              <AppTextSeeAll label="Set Manually" />
+            </View>
+            <AppSlider
+              showStepLabels
+              isMarkersSeparated
+              valueSuffix="mins"
+              values={[5, 20]}
+              max={60}
+              sliderLength={SliderWidth}
+            />
+          </View>
+          <View style={styles.sliderContainer}>
+            <View style={styles.introContainer}>
+              <Text style={styles.headerCaption}>Calories</Text>
+              <AppTextSeeAll label="Set Manually" />
+            </View>
+            <AppSlider
+              showSteps
+              isMarkersSeparated
+              values={[0, 500]}
+              max={2000}
+              valueSuffix="cal"
+              sliderLength={SliderWidth}
+            />
+          </View>
+          <View style={styles.ratingContainer}>
+            <View style={styles.introContainer}>
+              <Text style={styles.headerCaption}>Rating</Text>
+            </View>
+            <AirbnbRating
+              showRating={false}
+              defaultRating={3}
+              count={5}
+              size={20}
+              selectedColor={COLORS.orange}
+              unSelectedColor={COLORS.lightGrey}
+            />
+          </View>
+        </ScrollView>
         <View style={styles.buttonViews}>
           <AppButton title="Apply" onPress={applyFilter} />
         </View>
-      </ScrollView>
+      </>
     );
   };
 
@@ -187,5 +189,10 @@ const styles = StyleSheet.create({
   sliderContainer: {
     // paddingStart: 20,
     // paddingEnd: 20,
+  },
+  buttonViews: {
+    paddingStart: 20,
+    paddingEnd: 20,
+    paddingVertical: 12,
   },
 });

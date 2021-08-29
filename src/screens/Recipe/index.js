@@ -49,6 +49,12 @@ const RecipeScreen = () => {
     if (mealObj) {
       setMeal(mealObj);
 
+      if (actionSheetRef && actionSheetRef.current) {
+        setTimeout(() => {
+          onDirectionRef();
+        }, 300);
+      }
+
       Object.keys(mealObj).forEach(key => {
         if (key.indexOf('strIngredient') !== -1) {
           const value = mealObj[key];
@@ -75,14 +81,7 @@ const RecipeScreen = () => {
           }
         }
       });
-      console.log('tempIngredients: ', tempIngredients);
       setIngredients(tempIngredients);
-
-      if (actionSheetRef && actionSheetRef.current) {
-        setTimeout(() => {
-          onDirectionRef();
-        }, 300);
-      }
     }
   };
 
@@ -114,11 +113,8 @@ const RecipeScreen = () => {
         />
       </View>
       <MealImage meal={meal} />
-      <RecipeIngredients ingredients={ingredients} />
-      {/* <RecipeDirections
-        directions={meal.strInstructions}
-        recipeRef={actionSheetRef}
-      /> */}
+      {/* <RecipeIngredients ingredients={ingredients} /> */}
+      <RecipeDirections meal={meal} recipeRef={actionSheetRef} />
     </SafeAreaView>
   );
 };
@@ -128,7 +124,7 @@ export default RecipeScreen;
 const styles = StyleSheet.create({
   saferAreaView: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    backgroundColor: '#FEFEFF',
     paddingStart: 20,
     paddingEnd: 20,
   },

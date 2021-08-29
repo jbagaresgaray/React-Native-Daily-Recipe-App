@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    zIndex: 10,
+    // zIndex: 1,
 
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     width: '100%',
     position: 'absolute',
     bottom: 0,
-    borderRadius: 24,
+    borderBottomRightRadius: 24,
+    borderBottomLeftRadius: 24,
   },
 });
