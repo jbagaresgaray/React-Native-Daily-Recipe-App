@@ -18,13 +18,13 @@ Inspired from Hend Elgohary https://www.uplabs.com/posts/daily-recipe-light-dark
 
 ## Plugins Used
 
-- Fast Image, 
-- React Native Thumbnail Grid, 
+- React Native Fast Image, 
 - Redux, 
-- Redux-Thunk, 
+- Redux-Saga, 
 - Redux Toolkit, 
 - React Native Actions Sheet, 
-- React Navigation
+- React Native Bottom Sheet, 
+- React Navigation v5
 
 
 ## Source URL
@@ -35,7 +35,7 @@ Inspired from Hend Elgohary https://www.uplabs.com/posts/daily-recipe-light-dark
 
 There are 2 branch used to here
 
-- master - uses redux and api service to get data from MealDB API
+- master - uses redux, redux-saga and api service to get data from MealDB API
 - prototype - uses a fake json file with the same data coming from the Unsplash API
 
 
