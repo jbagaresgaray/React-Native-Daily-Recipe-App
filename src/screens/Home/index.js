@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/core';
-import React, {useLayoutEffect} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,9 @@ import {
   StatusBar,
   Dimensions,
   ScrollView,
+  RefreshControl,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import AppSearchBar from '../../components/AppSearchBar/AppSearchBar';
 import {COLORS} from '../../styles/color';
@@ -18,23 +20,44 @@ import {
 } from '../../styles/typography';
 import Recommended from './Recommended';
 import TodaysRecipe from './TodaysRecipe';
-
-import LatestMealsArr from '../../api/fake/latest_meals.json';
+import {mealsActions, mealsSelectors} from '../../stores/slices/mealsSlice';
+import {generateRandomLetter} from '../../utils';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [refreshing, setRefreshing] = useState(false);
+  const LatestMealsArr = useSelector(mealsSelectors.TodaysRecipes);
+  const RecommendedArr = useSelector(mealsSelectors.Recommended);
 
-  const navigateRecipe = recipe => {
+  const navigateRecipe = (recipe, action) => {
+    console.log('action: ', action);
+    console.log('recipe: ', recipe);
     navigation.navigate('Recipe', {
       recipe,
+      action,
     });
   };
+
+  const onRefresh = useCallback(async () => {
+    const randomRecipes = generateRandomLetter();
+    const randomRecommended = generateRandomLetter();
+
+    setRefreshing(true);
+
+    await dispatch(mealsActions.todaysRecipeRequest(randomRecipes));
+    await dispatch(mealsActions.recommendedRequest(randomRecommended));
+    setRefreshing(false);
+  }, [dispatch]);
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.saferAreaView}>
-        <ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
           <View style={styles.introContainer}>
             <Text style={styles.introUserText}>Bonjour, Emma</Text>
             <Text style={styles.introCaption} numberOfLines={2}>
@@ -45,14 +68,11 @@ const HomeScreen = () => {
             <AppSearchBar />
           </View>
           <TodaysRecipe
-            meals={LatestMealsArr.meals}
+            meals={LatestMealsArr}
             navigateRecipe={navigateRecipe}
           />
           <View style={styles.borderLine} />
-          <Recommended
-            meals={LatestMealsArr.meals}
-            navigateRecipe={navigateRecipe}
-          />
+          <Recommended meals={RecommendedArr} navigateRecipe={navigateRecipe} />
         </ScrollView>
       </SafeAreaView>
     </>

@@ -1,6 +1,6 @@
 import {call, put, fork, takeLatest} from 'redux-saga/effects';
-import AppServices from '../../api/services';
-import {listsActions} from '../slices/listSlice';
+import AppServices from '../../../api/services';
+import {listsActions} from '../../slices/listSlice';
 
 function* fetchAreas() {
   try {

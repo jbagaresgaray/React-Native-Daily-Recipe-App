@@ -1,8 +1,16 @@
 import {all} from 'redux-saga/effects';
-import listsArea from './listsArea';
-import listCategories from './listsCategories';
-import listIngredients from './listsIngredients';
+import listsArea from './lists/listsArea';
+import listCategories from './lists/listsCategories';
+import listIngredients from './lists/listsIngredients';
+import listAllTodaysRecipes from './meals/listAllTodaysRecipes';
+import listAllRecommended from './meals/listAllRecommended';
 
 export default function* rootSaga() {
-  yield all([listsArea(), listCategories(), listIngredients()]);
+  yield all([
+    listsArea(),
+    listCategories(),
+    listIngredients(),
+    listAllTodaysRecipes(),
+    listAllRecommended(),
+  ]);
 }

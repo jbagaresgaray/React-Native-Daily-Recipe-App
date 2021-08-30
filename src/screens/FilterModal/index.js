@@ -3,6 +3,8 @@ import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actions-sheet';
 import {AirbnbRating} from 'react-native-elements';
+import {useSelector} from 'react-redux';
+
 import AppButton from '../../components/AppButton/AppButton';
 import AppSlider from '../../components/AppSlider/AppSlider';
 import AppTextSeeAll from '../../components/AppTextSeeAll/AppTextSeeAll';
@@ -15,11 +17,11 @@ import {
 } from '../../styles/typography';
 
 import MealArr from '../../api/fake/meal_type.json';
-import CourseArr from '../../api/fake/categories.json';
+import {listsSelectors} from '../../stores/slices/listSlice';
 
 const FilterModalScreen = ({bottomSheetRef}) => {
+  const CoursesArr = useSelector(listsSelectors.Categories);
   const MealsArr = MealArr.types;
-  const CoursesArr = CourseArr.meals;
   const SliderWidth = Dimensions.get('window').width - 60;
 
   const applyFilter = () => {

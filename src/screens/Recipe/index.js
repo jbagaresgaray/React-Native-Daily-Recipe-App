@@ -2,6 +2,8 @@ import {useNavigation, useRoute} from '@react-navigation/core';
 import React, {createRef, useEffect, useLayoutEffect, useState} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import {AirbnbRating} from 'react-native-elements';
+import {useSelector} from 'react-redux';
+
 import {COLORS} from '../../styles/color';
 import {
   FONT_PRIMARY_MEDIUM,
@@ -12,14 +14,14 @@ import AppNotificationButton from '../../components/AppNotificationButton/AppNot
 import AppLoveButton from '../../components/AppLoveButton/AppLoveButton';
 import MealImage from './MealImage';
 
-import LatestMealsArr from '../../api/fake/latest_meals.json';
-import IngredientsArr from '../../api/fake/ingredients.json';
-
 import RecipeDirections from './RecipeDirections';
 import RecipeIngredients from './RecipeIngredients';
-import {MEAL_DB_INGREDIENT_IMAGE} from '../../constants';
+import {HOME_ACTION, MEAL_DB_INGREDIENT_IMAGE} from '../../constants';
 import AppTextIcon from '../../components/AppTextIcon/AppTextIcon';
 import AppBackButton from '../../components/AppBackButton/AppBackButton';
+
+import {listsSelectors} from '../../stores/slices/listSlice';
+import {mealsSelectors} from '../../stores/slices/mealsSlice';
 
 const RecipeScreen = () => {
   const navigation = useNavigation();
@@ -27,6 +29,9 @@ const RecipeScreen = () => {
   const actionSheetRef = createRef();
   const [meal, setMeal] = useState({});
   const [ingredients, setIngredients] = useState([]);
+  const IngredientsArr = useSelector(listsSelectors.Ingredients);
+  const LatestMealsArr = useSelector(mealsSelectors.TodaysRecipes);
+  const RecommendedArr = useSelector(mealsSelectors.Recommended);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -39,16 +44,21 @@ const RecipeScreen = () => {
     const params = route.params;
     if (params && params.recipe) {
       const recipe = params.recipe;
-      filterMeal(recipe.idMeal);
+      filterMeal(recipe.idMeal, params.action);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const filterMeal = id => {
+  const filterMeal = (id, action) => {
     let tempIngredients = [];
-    const ingredientsTempArr = IngredientsArr.meals;
-    const mealsArr = LatestMealsArr.meals;
-    const mealObj = mealsArr.find(item => item.idMeal === id);
+    let mealObj = {};
+
+    if (action === HOME_ACTION.RECOMMENDED) {
+      mealObj = RecommendedArr.find(item => item.idMeal === id);
+    } else {
+      mealObj = LatestMealsArr.find(item => item.idMeal === id);
+    }
+
     if (mealObj) {
       setMeal(mealObj);
 
@@ -62,7 +72,7 @@ const RecipeScreen = () => {
         if (key.indexOf('strIngredient') !== -1) {
           const value = mealObj[key];
           if (value !== '' && value !== null) {
-            const resultData = ingredientsTempArr.find(
+            const resultData = IngredientsArr.find(
               item =>
                 item.strIngredient.toLowerCase() ===
                 String(value).toLowerCase(),

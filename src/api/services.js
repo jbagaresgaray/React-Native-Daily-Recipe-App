@@ -10,6 +10,9 @@ const AppServices = {
   async listAllIngredients() {
     return await API.get('/list.php?i=list');
   },
+  async listAllMealsByFirstLetter(params) {
+    return await API.get(`/search.php?f=${params}`);
+  },
 };
 
 export default AppServices;

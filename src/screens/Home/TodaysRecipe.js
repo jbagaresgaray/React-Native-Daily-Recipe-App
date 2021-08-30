@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import AppTextHeader from '../../components/AppTextHeader/AppTextHeader';
 import AppRecipeCard from '../../components/AppRecipeCard/AppRecipeCard';
+import {HOME_ACTION} from '../../constants';
 
 const TodaysRecipe = ({meals, navigateRecipe}) => {
   const renderItem = ({item, index}) => {
@@ -14,7 +15,7 @@ const TodaysRecipe = ({meals, navigateRecipe}) => {
         category={item.strCategory}
         area={item.strArea}
         image={item.strMealThumb}
-        onPress={() => navigateRecipe(item)}
+        onPress={() => navigateRecipe(item, HOME_ACTION.TODAY)}
       />
     );
   };

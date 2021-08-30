@@ -3,6 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import AppTextHeader from '../../components/AppTextHeader/AppTextHeader';
 import AppRecipeItem from '../../components/AppRecipeItem/AppRecipeItem';
+import {HOME_ACTION} from '../../constants';
 
 const Recommended = props => {
   const {meals, navigateRecipe} = props;
@@ -18,7 +19,7 @@ const Recommended = props => {
             category={item.strCategory}
             area={item.strArea}
             image={item.strMealThumb}
-            onPress={() => navigateRecipe(item)}
+            onPress={() => navigateRecipe(item, HOME_ACTION.RECOMMENDED)}
           />
         ))}
     </View>

@@ -17,6 +17,8 @@ import AppButton from '../../components/AppButton/AppButton';
 import AppHeaderLogo from '../../components/AppHeaderLogo/AppHeaderLogo';
 import {COLORS} from '../../styles/color';
 import {listsActions} from '../../stores/slices/listSlice';
+import {mealsActions} from '../../stores/slices/mealsSlice';
+import {generateRandomLetter} from '../../utils';
 
 const LandingScreen = () => {
   const dispatch = useDispatch();
@@ -30,11 +32,22 @@ const LandingScreen = () => {
     navigation.navigate('Register');
   };
 
-  useEffect(() => {
+  const initAppData = () => {
+    const randomRecipes = generateRandomLetter();
+    const randomRecommended = generateRandomLetter();
+
     dispatch(listsActions.listAreaRequest());
     dispatch(listsActions.listCategoriesRequest());
     dispatch(listsActions.listIngredientsRequest());
-  }, [dispatch]);
+
+    dispatch(mealsActions.todaysRecipeRequest(randomRecipes));
+    dispatch(mealsActions.recommendedRequest(randomRecommended));
+  };
+
+  useEffect(() => {
+    initAppData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ImageBackground source={landingImg} style={styles.bgImage}>
