@@ -71,6 +71,7 @@ const CustomDrawerContent = props => {
             color={focused ? COLORS.orange : COLORS.lightGrey}
           />
         )}
+        onPress={() => props.navigation.navigate('Landing')}
       />
     </DrawerContentScrollView>
   );
