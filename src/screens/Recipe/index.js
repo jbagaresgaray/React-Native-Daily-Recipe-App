@@ -19,6 +19,7 @@ import RecipeDirections from './RecipeDirections';
 import RecipeIngredients from './RecipeIngredients';
 import {MEAL_DB_INGREDIENT_IMAGE} from '../../constants';
 import AppTextIcon from '../../components/AppTextIcon/AppTextIcon';
+import AppBackButton from '../../components/AppBackButton/AppBackButton';
 
 const RecipeScreen = () => {
   const navigation = useNavigation();
@@ -29,6 +30,7 @@ const RecipeScreen = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
+      headerLeft: () => <AppBackButton />,
       headerRight: () => <AppNotificationButton />,
     });
   }, [navigation]);
