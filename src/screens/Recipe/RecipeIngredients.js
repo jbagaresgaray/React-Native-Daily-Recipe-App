@@ -19,13 +19,6 @@ const RecipeIngredients = ({ingredients}) => {
             console.log('FastImage error: ', e);
           }}
         />
-        {/* <Image
-          style={styles.Image}
-          source={{
-            uri: item.url,
-          }}
-          resizeMode="cover"
-        /> */}
       </TouchableOpacity>
     );
   };

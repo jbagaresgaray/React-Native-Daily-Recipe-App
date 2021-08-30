@@ -113,7 +113,7 @@ const RecipeScreen = () => {
         />
       </View>
       <MealImage meal={meal} />
-      {/* <RecipeIngredients ingredients={ingredients} /> */}
+      <RecipeIngredients ingredients={ingredients} />
       <RecipeDirections meal={meal} recipeRef={actionSheetRef} />
     </SafeAreaView>
   );

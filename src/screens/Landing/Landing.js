@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,14 +9,17 @@ import {
   ScrollView,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/core';
+import {useDispatch} from 'react-redux';
 
 import landingImg from '../../assets/img/bg.png';
 
 import AppButton from '../../components/AppButton/AppButton';
 import AppHeaderLogo from '../../components/AppHeaderLogo/AppHeaderLogo';
 import {COLORS} from '../../styles/color';
+import {listsActions} from '../../stores/slices/listSlice';
 
 const LandingScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const onSignIn = () => {
@@ -26,6 +29,12 @@ const LandingScreen = () => {
   const onSignUp = () => {
     navigation.navigate('Register');
   };
+
+  useEffect(() => {
+    dispatch(listsActions.listAreaRequest());
+    dispatch(listsActions.listCategoriesRequest());
+    dispatch(listsActions.listIngredientsRequest());
+  }, [dispatch]);
 
   return (
     <ImageBackground source={landingImg} style={styles.bgImage}>
