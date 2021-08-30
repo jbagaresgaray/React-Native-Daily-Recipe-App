@@ -20,7 +20,6 @@ import LatestMealsArr from '../../api/fake/latest_meals.json';
 import AppTextSeeAll from '../../components/AppTextSeeAll/AppTextSeeAll';
 
 const RecentlyViewedScreen = () => {
-
   const ListHeaderComponent = () => {
     return (
       <>
@@ -31,7 +30,7 @@ const RecentlyViewedScreen = () => {
           <AppTextSeeAll label="Clear" />
         </View>
         <View style={styles.searchBarContainer}>
-          <AppSearchBar />
+          <AppSearchBar showFilter />
         </View>
       </>
     );

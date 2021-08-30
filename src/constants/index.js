@@ -36,3 +36,7 @@ export const ALPHABETS = [
   'Y',
   'Z',
 ];
+
+export const APP_FAVORITES = 'APP_FAVORITES';
+export const APP_RECENT_VIEWED = 'APP_RECENT_VIEWED';
+export const APP_LANGUAGE = 'APP_LANGUAGE';

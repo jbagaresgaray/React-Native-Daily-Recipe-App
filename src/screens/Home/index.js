@@ -65,7 +65,7 @@ const HomeScreen = () => {
             </Text>
           </View>
           <View style={styles.searchBarContainer}>
-            <AppSearchBar />
+            <AppSearchBar showFilter />
           </View>
           <TodaysRecipe
             meals={LatestMealsArr}

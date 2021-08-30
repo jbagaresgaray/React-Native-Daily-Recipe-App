@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createRef, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -10,13 +10,32 @@ import {
 import {ListItem, Icon, Switch} from 'react-native-elements';
 
 import AppTextSeeAll from '../../components/AppTextSeeAll/AppTextSeeAll';
+import {APP_LANGUAGE} from '../../constants';
 import {COLORS} from '../../styles/color';
 import {
   FONT_PRIMARY_EXTRA_BOLD,
   FONT_PRIMARY_MEDIUM,
 } from '../../styles/typography';
+import AppStorage from '../../utils/Storage';
+import LanguageModalScreen from '../LanguagesModal';
 
 const SettingsScreen = () => {
+  const languageModalRef = createRef();
+  const [language, setLanguage] = useState({});
+
+  const onViewLanguages = () => {
+    if (languageModalRef && languageModalRef.current) {
+      setTimeout(() => {
+        languageModalRef.current?.setModalVisible();
+      }, 300);
+    }
+  };
+
+  useEffect(() => {
+    const selected = AppStorage.getItem(APP_LANGUAGE);
+    setLanguage(selected);
+  }, []);
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -40,7 +59,7 @@ const SettingsScreen = () => {
                 Language
               </ListItem.Title>
             </ListItem.Content>
-            <AppTextSeeAll label="English" />
+            <AppTextSeeAll label={language.name} onPress={onViewLanguages} />
           </ListItem>
           <View style={styles.borderLine} />
           <View style={styles.introContainer}>
@@ -88,6 +107,7 @@ const SettingsScreen = () => {
             />
           </ListItem>
         </ScrollView>
+        <LanguageModalScreen bottomSheetRef={languageModalRef} />
       </SafeAreaView>
     </>
   );

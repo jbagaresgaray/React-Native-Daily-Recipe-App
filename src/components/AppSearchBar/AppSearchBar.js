@@ -5,7 +5,7 @@ import FilterModalScreen from '../../screens/FilterModal';
 import {COLORS} from '../../styles/color';
 import {FONT_PRIMARY_REGULAR} from '../../styles/typography';
 
-const AppSearchBar = () => {
+const AppSearchBar = ({showFilter}) => {
   const bottomSheetRef = createRef();
 
   const onOpenFilter = () => {
@@ -24,18 +24,20 @@ const AppSearchBar = () => {
           inputContainerStyle={styles.searchInputContainer}
           containerStyle={styles.searchContainer}
         />
-        <Button
-          onPress={onOpenFilter}
-          icon={
-            <Icon
-              name="options-outline"
-              type="ionicon"
-              size={21}
-              color={COLORS.black}
-            />
-          }
-          buttonStyle={styles.searchButtonStyle}
-        />
+        {showFilter && (
+          <Button
+            onPress={onOpenFilter}
+            icon={
+              <Icon
+                name="options-outline"
+                type="ionicon"
+                size={21}
+                color={COLORS.black}
+              />
+            }
+            buttonStyle={styles.searchButtonStyle}
+          />
+        )}
       </View>
       <FilterModalScreen bottomSheetRef={bottomSheetRef} />
     </>

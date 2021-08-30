@@ -17,7 +17,6 @@ import {FONT_PRIMARY_EXTRA_BOLD} from '../../styles/typography';
 import LatestMealsArr from '../../api/fake/latest_meals.json';
 
 const FavoriteScreen = () => {
-
   const ListHeaderComponent = () => {
     return (
       <>
@@ -27,7 +26,7 @@ const FavoriteScreen = () => {
           </Text>
         </View>
         <View style={styles.searchBarContainer}>
-          <AppSearchBar />
+          <AppSearchBar showFilter />
         </View>
       </>
     );

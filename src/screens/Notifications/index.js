@@ -66,7 +66,7 @@ const NotificationsScreen = () => {
           <AppTextSeeAll label="Mark All As Read" />
         </View>
         <View style={styles.searchBarContainer}>
-          <AppSearchBar />
+          <AppSearchBar showFilter />
         </View>
         <FlatList
           data={NotificationsArr.notifications}
