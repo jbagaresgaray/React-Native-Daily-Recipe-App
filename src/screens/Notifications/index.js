@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {
   View,
   Text,
@@ -20,8 +20,18 @@ import {
 } from '../../styles/typography';
 
 import NotificationsArr from '../../api/fake/notifications.json';
+import {useNavigation} from '@react-navigation/core';
+import AppBackButton from '../../components/AppBackButton/AppBackButton';
 
 const NotificationsScreen = () => {
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => <AppBackButton />,
+    });
+  }, [navigation]);
+
   const renderItem = ({item}) => {
     return (
       <ListItem

@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/core';
 import React, {createRef, useEffect, useLayoutEffect, useState} from 'react';
-import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import {AirbnbRating} from 'react-native-elements';
 import {COLORS} from '../../styles/color';
 import {
@@ -18,6 +18,7 @@ import IngredientsArr from '../../api/fake/ingredients.json';
 import RecipeDirections from './RecipeDirections';
 import RecipeIngredients from './RecipeIngredients';
 import {MEAL_DB_INGREDIENT_IMAGE} from '../../constants';
+import AppTextIcon from '../../components/AppTextIcon/AppTextIcon';
 
 const RecipeScreen = () => {
   const navigation = useNavigation();
@@ -92,29 +93,53 @@ const RecipeScreen = () => {
 
   return (
     <SafeAreaView style={styles.saferAreaView}>
-      <View style={styles.introContainer}>
-        <View>
-          <Text style={styles.mealCategory}>{meal.strCategory}</Text>
-          <Text style={styles.mealCaption} numberOfLines={2}>
-            {meal.strMeal}
-          </Text>
-          <Text style={styles.mealArea}>{meal.strArea}</Text>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <View style={styles.introContainer}>
+          <View>
+            <Text style={styles.mealCategory}>{meal.strCategory}</Text>
+            <Text style={styles.mealCaption} numberOfLines={2}>
+              {meal.strMeal}
+            </Text>
+            <Text style={styles.mealArea}>{meal.strArea}</Text>
+          </View>
+          <AppLoveButton size={21} />
         </View>
-        <AppLoveButton size={21} />
-      </View>
-      <View style={styles.mealRatingContainer}>
-        <AirbnbRating
-          showRating={false}
-          defaultRating={3}
-          count={5}
-          size={15}
-          selectedColor={COLORS.orange}
-          unSelectedColor={COLORS.lightGrey}
+        <View style={styles.mealRatingContainer}>
+          <AirbnbRating
+            showRating={false}
+            defaultRating={3}
+            count={5}
+            size={15}
+            selectedColor={COLORS.orange}
+            unSelectedColor={COLORS.lightGrey}
+          />
+        </View>
+        <View style={styles.mealServingContainer}>
+          <View style={styles.mealCardFooter}>
+            <AppTextIcon
+              label="10 mins"
+              icon="time-outline"
+              size={18}
+              textStyle={styles.AppTextIconStyle}
+            />
+          </View>
+          <View style={styles.mealCardFooter}>
+            <AppTextIcon
+              label="1 Serving"
+              icon="fast-food-outline"
+              size={18}
+              textStyle={styles.AppTextIconStyle}
+            />
+          </View>
+        </View>
+        <MealImage meal={meal} />
+        <RecipeIngredients ingredients={ingredients} />
+        <RecipeDirections
+          meal={meal}
+          ingredients={ingredients}
+          recipeRef={actionSheetRef}
         />
-      </View>
-      <MealImage meal={meal} />
-      <RecipeIngredients ingredients={ingredients} />
-      <RecipeDirections meal={meal} recipeRef={actionSheetRef} />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -124,7 +149,10 @@ export default RecipeScreen;
 const styles = StyleSheet.create({
   saferAreaView: {
     flex: 1,
-    backgroundColor: '#FEFEFF',
+    backgroundColor: '#F5F5F5',
+  },
+  scrollView: {
+    flex: 1,
     paddingStart: 20,
     paddingEnd: 20,
   },
@@ -159,7 +187,7 @@ const styles = StyleSheet.create({
   mealRatingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingBottom: 24,
+    paddingBottom: 6,
   },
   mealCardFooter: {
     paddingBottom: 24,
@@ -169,5 +197,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.superLight,
     marginTop: 16,
     marginBottom: 16,
+  },
+  mealServingContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  AppTextIconStyle: {
+    fontSize: 12,
+    lineHeight: 14,
+    color: COLORS.lightGrey,
   },
 });

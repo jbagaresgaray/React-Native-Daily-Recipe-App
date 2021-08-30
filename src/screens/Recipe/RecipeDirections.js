@@ -1,19 +1,15 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import BottomSheet, {
-  BottomSheetBackdrop,
-  BottomSheetScrollView,
-} from '@gorhom/bottom-sheet';
-import Animated, {
-  useAnimatedStyle,
-  interpolateColor,
-} from 'react-native-reanimated';
+import {ScrollView} from 'react-native-gesture-handler';
+import BottomSheet from '@gorhom/bottom-sheet';
+import Animated from 'react-native-reanimated';
 
 import {FONT_PRIMARY_REGULAR} from '../../styles/typography';
 import {COLORS} from '../../styles/color';
 import RecipeItem from './RecipeItem';
+import RecipeIngredients from './RecipeIngredients';
 
-const RecipeDirections = ({meal, recipeRef}) => {
+const RecipeDirections = ({meal, recipeRef, ingredients}) => {
   const [showMealItem, setShowMealItem] = useState(false);
   const snapPoints = useMemo(() => ['25%', '35%', '90%'], []);
 
@@ -25,32 +21,19 @@ const RecipeDirections = ({meal, recipeRef}) => {
     }
   }, []);
 
-  const renderBackdrop = useCallback(
-    props => (
-      <BottomSheetBackdrop
-        {...props}
-        enableTouchThrough={true}
-        disappearsOnIndex={1}
-        appearsOnIndex={2}
-        closeOnPress={false}
-      />
-    ),
-    [],
-  );
-
   return (
     <BottomSheet
       ref={recipeRef}
       index={1}
       enablePanDownToClose={false}
       snapPoints={snapPoints}
-      backdropComponent={renderBackdrop}
       onChange={handleSheetChanges}
       style={styles.bottomSheet}>
-      <BottomSheetScrollView
-        contentContainerStyle={styles.actionSheetContainer}>
+      <ScrollView
+        contentContainerStyle={styles.actionSheetContainer}
+        nestedScrollEnabled>
         {showMealItem && (
-          <Animated.View pointerEvents="none">
+          <Animated.View>
             <RecipeItem
               meal={meal.strMeal}
               category={meal.strCategory}
@@ -58,10 +41,12 @@ const RecipeDirections = ({meal, recipeRef}) => {
               image={meal.strMealThumb}
             />
             <View style={styles.borderLine} />
+            <RecipeIngredients ingredients={ingredients} isBottomSheet />
+            <View style={styles.borderLine} />
           </Animated.View>
         )}
         <Text style={styles.formatText}>{meal.strInstructions}</Text>
-      </BottomSheetScrollView>
+      </ScrollView>
     </BottomSheet>
   );
 };

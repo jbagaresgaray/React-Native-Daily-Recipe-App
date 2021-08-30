@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/core';
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -9,8 +9,7 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
-import AppMenuButton from '../../components/AppMenuButton/AppMenuButton';
-import AppNotificationButton from '../../components/AppNotificationButton/AppNotificationButton';
+
 import AppSearchBar from '../../components/AppSearchBar/AppSearchBar';
 import AppRecipeItem from '../../components/AppRecipeItem/AppRecipeItem';
 
@@ -21,14 +20,6 @@ import LatestMealsArr from '../../api/fake/latest_meals.json';
 import AppTextSeeAll from '../../components/AppTextSeeAll/AppTextSeeAll';
 
 const RecentlyViewedScreen = () => {
-  const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => <AppMenuButton />,
-      headerRight: () => <AppNotificationButton />,
-    });
-  }, [navigation]);
 
   const ListHeaderComponent = () => {
     return (

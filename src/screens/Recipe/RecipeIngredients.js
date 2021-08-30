@@ -1,23 +1,21 @@
 import React from 'react';
-import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
+import {FlatList} from 'react-native-gesture-handler';
 import {COLORS} from '../../styles/color';
 import {FONT_PRIMARY_BOLD} from '../../styles/typography';
 
-const RecipeIngredients = ({ingredients}) => {
+const RecipeIngredients = ({ingredients, isBottomSheet}) => {
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity style={styles.ImageContainer}>
+      <TouchableOpacity style={styles.ImageContainer} activeOpacity={0.6}>
         <FastImage
           style={styles.Image}
           source={{
             uri: item.url,
           }}
           resizeMode={FastImage.resizeMode.cover}
-          onError={e => {
-            console.log('FastImage error: ', e);
-          }}
         />
       </TouchableOpacity>
     );
@@ -31,6 +29,7 @@ const RecipeIngredients = ({ingredients}) => {
         data={ingredients}
         renderItem={renderItem}
         keyExtractor={(item, index) => 'key' + index}
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   );
@@ -60,11 +59,15 @@ const styles = StyleSheet.create({
   ImageContainer: {
     height: 60,
     width: 60,
+    borderRadius: 10,
+    margin: 6,
+    backgroundColor: COLORS.white,
+    // backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   Image: {
-    height: 60,
-    width: 60,
-    borderRadius: 10,
-    padding: 6,
+    height: 50,
+    width: 50,
   },
 });
