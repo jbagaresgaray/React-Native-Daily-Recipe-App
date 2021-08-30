@@ -10,8 +10,6 @@ import {
   ScrollView,
 } from 'react-native';
 
-import AppMenuButton from '../../components/AppMenuButton/AppMenuButton';
-import AppNotificationButton from '../../components/AppNotificationButton/AppNotificationButton';
 import AppSearchBar from '../../components/AppSearchBar/AppSearchBar';
 import {COLORS} from '../../styles/color';
 import {
@@ -25,13 +23,6 @@ import LatestMealsArr from '../../api/fake/latest_meals.json';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => <AppMenuButton />,
-      headerRight: () => <AppNotificationButton />,
-    });
-  }, [navigation]);
 
   const navigateRecipe = recipe => {
     navigation.navigate('Recipe', {

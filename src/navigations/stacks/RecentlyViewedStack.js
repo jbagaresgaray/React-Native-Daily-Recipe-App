@@ -5,6 +5,10 @@ import {COLORS} from '../../styles/color';
 import RecentlyViewedScreen from '../../screens/RecentlyViewed';
 import NotificationsScreen from '../../screens/Notifications';
 import RecipeScreen from '../../screens/Recipe';
+import Animated from 'react-native-reanimated';
+import {StyleSheet} from 'react-native';
+import AppMenuButton from '../../components/AppMenuButton/AppMenuButton';
+import AppNotificationButton from '../../components/AppNotificationButton/AppNotificationButton';
 
 const Stack = createStackNavigator();
 const navigationOptions = {
@@ -15,21 +19,41 @@ const navigationOptions = {
   headerBackTitleVisible: false,
   headerTintColor: COLORS.black,
   headerTitle: null,
+  headerLeft: () => <AppMenuButton />,
+  headerRight: () => <AppNotificationButton />,
 };
 
-const RecentlyViewedStackNavigator = () => {
+const RecentlyViewedStackNavigator = ({style}) => {
   return (
-    <Stack.Navigator
-      initialRouteName="RecentlyViewedScreen"
-      screenOptions={navigationOptions}>
-      <Stack.Screen
-        name="RecentlyViewedScreen"
-        component={RecentlyViewedScreen}
-      />
-      <Stack.Screen name="Notification" component={NotificationsScreen} />
-      <Stack.Screen name="Recipe" component={RecipeScreen} />
-    </Stack.Navigator>
+    <Animated.View style={StyleSheet.flatten([styles.stack, style])}>
+      <Stack.Navigator
+        initialRouteName="RecentlyViewedScreen"
+        screenOptions={navigationOptions}>
+        <Stack.Screen
+          name="RecentlyViewedScreen"
+          component={RecentlyViewedScreen}
+        />
+        <Stack.Screen name="Notification" component={NotificationsScreen} />
+        <Stack.Screen name="Recipe" component={RecipeScreen} />
+      </Stack.Navigator>
+    </Animated.View>
   );
 };
 
 export default RecentlyViewedStackNavigator;
+
+const styles = StyleSheet.create({
+  stack: {
+    flex: 1,
+    shadowColor: '#FFF',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
+    elevation: 5,
+    // overflow: 'scroll',
+    // borderWidth: 1,
+  },
+});

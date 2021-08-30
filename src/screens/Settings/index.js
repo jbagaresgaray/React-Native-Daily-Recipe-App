@@ -1,5 +1,4 @@
-import {useNavigation} from '@react-navigation/core';
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -10,8 +9,6 @@ import {
 } from 'react-native';
 import {ListItem, Icon, Switch} from 'react-native-elements';
 
-import AppMenuButton from '../../components/AppMenuButton/AppMenuButton';
-import AppNotificationButton from '../../components/AppNotificationButton/AppNotificationButton';
 import AppTextSeeAll from '../../components/AppTextSeeAll/AppTextSeeAll';
 import {COLORS} from '../../styles/color';
 import {
@@ -20,15 +17,6 @@ import {
 } from '../../styles/typography';
 
 const SettingsScreen = () => {
-  const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => <AppMenuButton />,
-      headerRight: () => <AppNotificationButton />,
-    });
-  }, [navigation]);
-
   return (
     <>
       <StatusBar barStyle="dark-content" />
