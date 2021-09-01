@@ -22,21 +22,29 @@ import Recommended from './Recommended';
 import TodaysRecipe from './TodaysRecipe';
 import {mealsActions, mealsSelectors} from '../../stores/slices/mealsSlice';
 import {generateRandomLetter} from '../../utils';
+import {appActions, appSelectors} from '../../stores/slices/appSlice';
+import {useToast} from 'react-native-toast-notifications';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const toast = useToast();
+
   const [refreshing, setRefreshing] = useState(false);
   const LatestMealsArr = useSelector(mealsSelectors.TodaysRecipes);
   const RecommendedArr = useSelector(mealsSelectors.Recommended);
+  const Favorites = useSelector(appSelectors.favorites);
 
   const navigateRecipe = (recipe, action) => {
-    console.log('action: ', action);
-    console.log('recipe: ', recipe);
     navigation.navigate('Recipe', {
       recipe,
       action,
     });
+  };
+
+  const isOnFavorites = meal => {
+    const result = Favorites.find(item => item.idMeal === meal.idMeal);
+    return !!result;
   };
 
   const onRefresh = useCallback(async () => {
@@ -49,6 +57,16 @@ const HomeScreen = () => {
     await dispatch(mealsActions.recommendedRequest(randomRecommended));
     setRefreshing(false);
   }, [dispatch]);
+
+  const onLikePress = async item => {
+    await dispatch(appActions.setFavorite(item));
+
+    if (isOnFavorites(item)) {
+      toast.show('Removed to favorites');
+    } else {
+      toast.show('Added to favorites');
+    }
+  };
 
   return (
     <>
@@ -70,9 +88,14 @@ const HomeScreen = () => {
           <TodaysRecipe
             meals={LatestMealsArr}
             navigateRecipe={navigateRecipe}
+            onLikePress={onLikePress}
           />
           <View style={styles.borderLine} />
-          <Recommended meals={RecommendedArr} navigateRecipe={navigateRecipe} />
+          <Recommended
+            meals={RecommendedArr}
+            navigateRecipe={navigateRecipe}
+            onLikePress={onLikePress}
+          />
         </ScrollView>
       </SafeAreaView>
     </>

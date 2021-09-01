@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {AirbnbRating, ListItem} from 'react-native-elements';
 import PropTypes from 'prop-types';
@@ -10,9 +10,18 @@ import {
 } from '../../styles/typography';
 import AppTextIcon from '../AppTextIcon/AppTextIcon';
 import AppLoveButton from '../AppLoveButton/AppLoveButton';
+import {useSelector} from 'react-redux';
+import {appSelectors} from '../../stores/slices/appSlice';
 
 const AppRecipeItem = props => {
-  const {category, meal, area, image, onPress} = props;
+  const {category, meal, area, image, id, onPress, onLikePress} = props;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const Favorites = useSelector(appSelectors.favorites);
+
+  useEffect(() => {
+    const favorite = Favorites.find(item => item.idMeal === id);
+    setIsFavorite(!!favorite);
+  }, [Favorites, id]);
 
   return (
     <ListItem
@@ -28,7 +37,7 @@ const AppRecipeItem = props => {
       />
       <ListItem.Content style={styles.ListItemContent}>
         <View style={styles.AppRecipeCardLoveButton}>
-          <AppLoveButton />
+          <AppLoveButton selected={isFavorite} onPress={onLikePress} />
         </View>
         <ListItem.Subtitle style={styles.AppRecipeCardCategory}>
           {category}

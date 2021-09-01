@@ -6,7 +6,7 @@ import AppRecipeItem from '../../components/AppRecipeItem/AppRecipeItem';
 import {HOME_ACTION} from '../../constants';
 
 const Recommended = props => {
-  const {meals, navigateRecipe} = props;
+  const {meals, navigateRecipe, onLikePress} = props;
 
   return (
     <View style={styles.RecommendedContainer}>
@@ -15,10 +15,12 @@ const Recommended = props => {
         meals.map((item, index) => (
           <AppRecipeItem
             key={index}
+            id={item.idMeal}
             meal={item.strMeal}
             category={item.strCategory}
             area={item.strArea}
             image={item.strMealThumb}
+            onLikePress={() => onLikePress(item)}
             onPress={() => navigateRecipe(item, HOME_ACTION.RECOMMENDED)}
           />
         ))}

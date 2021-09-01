@@ -8,15 +8,47 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/core';
+
 import AppSearchBar from '../../components/AppSearchBar/AppSearchBar';
 import AppRecipeItem from '../../components/AppRecipeItem/AppRecipeItem';
 
 import {COLORS} from '../../styles/color';
 import {FONT_PRIMARY_EXTRA_BOLD} from '../../styles/typography';
 
-import LatestMealsArr from '../../api/fake/latest_meals.json';
+import {appActions, appSelectors} from '../../stores/slices/appSlice';
+import {useToast} from 'react-native-toast-notifications';
 
 const FavoriteScreen = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const toast = useToast();
+
+  const LatestMealsArr = useSelector(appSelectors.favorites);
+
+  const isOnFavorites = meal => {
+    const result = LatestMealsArr.find(item => item.idMeal === meal.idMeal);
+    return !!result;
+  };
+
+  const onLikePress = async item => {
+    await dispatch(appActions.setFavorite(item));
+
+    if (isOnFavorites(item)) {
+      toast.show('Removed to favorites');
+    } else {
+      toast.show('Added to favorites');
+    }
+  };
+
+  const navigateRecipe = (recipe, action) => {
+    navigation.navigate('Recipe', {
+      recipe,
+      action,
+    });
+  };
+
   const ListHeaderComponent = () => {
     return (
       <>
@@ -40,6 +72,9 @@ const FavoriteScreen = () => {
         category={item.strCategory}
         area={item.strArea}
         image={item.strMealThumb}
+        id={item.idMeal}
+        onLikePress={() => onLikePress(item)}
+        onPress={() => navigateRecipe(item)}
       />
     );
   };
@@ -51,7 +86,7 @@ const FavoriteScreen = () => {
         {ListHeaderComponent()}
         <FlatList
           renderItem={renderItem}
-          data={LatestMealsArr.meals}
+          data={LatestMealsArr}
           keyExtractor={(item, index) => 'key' + index}
         />
       </SafeAreaView>

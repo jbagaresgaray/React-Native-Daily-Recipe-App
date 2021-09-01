@@ -9,6 +9,8 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {useToast} from 'react-native-toast-notifications';
 
 import AppSearchBar from '../../components/AppSearchBar/AppSearchBar';
 import AppRecipeItem from '../../components/AppRecipeItem/AppRecipeItem';
@@ -16,10 +18,42 @@ import AppRecipeItem from '../../components/AppRecipeItem/AppRecipeItem';
 import {COLORS} from '../../styles/color';
 import {FONT_PRIMARY_EXTRA_BOLD} from '../../styles/typography';
 
-import LatestMealsArr from '../../api/fake/latest_meals.json';
 import AppTextSeeAll from '../../components/AppTextSeeAll/AppTextSeeAll';
+import {appActions, appSelectors} from '../../stores/slices/appSlice';
 
 const RecentlyViewedScreen = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const toast = useToast();
+  const LatestMealsArr = useSelector(appSelectors.recentlyView);
+  const Favorites = useSelector(appSelectors.favorites);
+
+  const isOnFavorites = meal => {
+    const result = Favorites.find(item => item.idMeal === meal.idMeal);
+    return !!result;
+  };
+
+  const onClearRecents = () => {
+    dispatch(appActions.clearRecentlyView());
+  };
+
+  const onLikePress = async item => {
+    await dispatch(appActions.setFavorite(item));
+
+    if (isOnFavorites(item)) {
+      toast.show('Removed to favorites');
+    } else {
+      toast.show('Added to favorites');
+    }
+  };
+
+  const navigateRecipe = (recipe, action) => {
+    navigation.navigate('Recipe', {
+      recipe,
+      action,
+    });
+  };
+
   const ListHeaderComponent = () => {
     return (
       <>
@@ -27,7 +61,7 @@ const RecentlyViewedScreen = () => {
           <Text style={styles.introCaption} numberOfLines={2}>
             Recently Viewed
           </Text>
-          <AppTextSeeAll label="Clear" />
+          <AppTextSeeAll label="Clear" onPress={onClearRecents} />
         </View>
         <View style={styles.searchBarContainer}>
           <AppSearchBar showFilter />
@@ -37,13 +71,17 @@ const RecentlyViewedScreen = () => {
   };
 
   const renderItem = ({item, index}) => {
+    const meal = item.meal;
     return (
       <AppRecipeItem
         key={index}
-        meal={item.strMeal}
-        category={item.strCategory}
-        area={item.strArea}
-        image={item.strMealThumb}
+        meal={meal.strMeal}
+        category={meal.strCategory}
+        area={meal.strArea}
+        image={meal.strMealThumb}
+        id={meal.idMeal}
+        onLikePress={() => onLikePress(meal)}
+        onPress={() => navigateRecipe(meal)}
       />
     );
   };
@@ -56,7 +94,7 @@ const RecentlyViewedScreen = () => {
         <FlatList
           // ListHeaderComponent={}
           renderItem={renderItem}
-          data={LatestMealsArr.meals}
+          data={LatestMealsArr}
           keyExtractor={(item, index) => 'key' + index}
         />
       </SafeAreaView>

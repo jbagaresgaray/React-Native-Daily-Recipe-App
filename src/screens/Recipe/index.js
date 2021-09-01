@@ -2,7 +2,7 @@ import {useNavigation, useRoute} from '@react-navigation/core';
 import React, {createRef, useEffect, useLayoutEffect, useState} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import {AirbnbRating} from 'react-native-elements';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {COLORS} from '../../styles/color';
 import {
@@ -22,11 +22,13 @@ import AppBackButton from '../../components/AppBackButton/AppBackButton';
 
 import {listsSelectors} from '../../stores/slices/listSlice';
 import {mealsSelectors} from '../../stores/slices/mealsSlice';
+import {appActions} from '../../stores/slices/appSlice';
 
 const RecipeScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const actionSheetRef = createRef();
+  const dispatch = useDispatch();
   const [meal, setMeal] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const IngredientsArr = useSelector(listsSelectors.Ingredients);
@@ -44,19 +46,22 @@ const RecipeScreen = () => {
     const params = route.params;
     if (params && params.recipe) {
       const recipe = params.recipe;
-      filterMeal(recipe.idMeal, params.action);
+      filterMeal(recipe.idMeal, params.action, recipe);
+      dispatch(appActions.setRecentlyView(recipe));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
-  const filterMeal = (id, action) => {
+  const filterMeal = (id, action, recipe) => {
     let tempIngredients = [];
     let mealObj = {};
 
     if (action === HOME_ACTION.RECOMMENDED) {
       mealObj = RecommendedArr.find(item => item.idMeal === id);
-    } else {
+    } else if (action === HOME_ACTION.TODAY) {
       mealObj = LatestMealsArr.find(item => item.idMeal === id);
+    } else {
+      mealObj = recipe;
     }
 
     if (mealObj) {
@@ -99,7 +104,6 @@ const RecipeScreen = () => {
   };
 
   const onDirectionRef = () => {
-    console.log('onDirectionRef');
     actionSheetRef.current?.setModalVisible();
   };
 

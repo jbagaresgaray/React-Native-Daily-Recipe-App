@@ -14,6 +14,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
+import {ToastProvider} from 'react-native-toast-notifications';
 
 import RootNavigator from './navigations';
 import {persistor, store} from './stores';
@@ -25,7 +26,9 @@ const App = () => {
         <SafeAreaProvider>
           <StatusBar barStyle="default" />
           <NavigationContainer>
-            <RootNavigator />
+            <ToastProvider>
+              <RootNavigator />
+            </ToastProvider>
           </NavigationContainer>
         </SafeAreaProvider>
       </PersistGate>

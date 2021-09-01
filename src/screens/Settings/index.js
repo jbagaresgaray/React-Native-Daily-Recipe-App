@@ -36,7 +36,6 @@ const SettingsScreen = () => {
 
   const onPushNotificationChange = useCallback(
     value => {
-      console.log('onPushNotificationChange: ', value);
       dispatch(appActions.setPushNotification(value));
     },
     [dispatch],
@@ -44,7 +43,6 @@ const SettingsScreen = () => {
 
   const onEmailNotificationChange = useCallback(
     value => {
-      console.log('onEmailNotificationChange: ', value);
       dispatch(appActions.setEmailNotification(value));
     },
     [dispatch],

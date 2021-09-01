@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {AirbnbRating} from 'react-native-elements';
@@ -11,8 +11,26 @@ import {
 } from '../../styles/typography';
 import AppLoveButton from '../AppLoveButton/AppLoveButton';
 import AppTextIcon from '../AppTextIcon/AppTextIcon';
+import {appSelectors} from '../../stores/slices/appSlice';
+import {useSelector} from 'react-redux';
 
-const AppRecipeCard = ({category, meal, area, image, onPress}) => {
+const AppRecipeCard = ({
+  category,
+  meal,
+  area,
+  image,
+  id,
+  onPress,
+  onLikePress,
+}) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const Favorites = useSelector(appSelectors.favorites);
+
+  useEffect(() => {
+    const favorite = Favorites.find(item => item.idMeal === id);
+    setIsFavorite(!!favorite);
+  }, [Favorites, id]);
+
   return (
     <TouchableOpacity
       style={styles.AppRecipeCard}
@@ -20,7 +38,7 @@ const AppRecipeCard = ({category, meal, area, image, onPress}) => {
       activeOpacity={0.8}>
       <View style={styles.AppRecipeCardMedia}>
         <View style={styles.AppRecipeCardLoveButton}>
-          <AppLoveButton />
+          <AppLoveButton selected={isFavorite} onPress={onLikePress} />
         </View>
         <View style={styles.AppRecipeCardImageContainer}>
           <FastImage
