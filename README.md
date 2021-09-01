@@ -14,7 +14,7 @@ Inspired from Hend Elgohary https://www.uplabs.com/posts/daily-recipe-light-dark
 
 ## Youtube URL
 
-[![](video.gif)](https://www.youtube.com/watch?v=)
+[![](video.gif)](https://www.youtube.com/watch?v=Ao0uyAVvh0M)
 
 ## Plugins Used
 
