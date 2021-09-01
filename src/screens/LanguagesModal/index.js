@@ -3,22 +3,21 @@ import {StyleSheet, View} from 'react-native';
 import ActionSheet from 'react-native-actions-sheet';
 import {ListItem} from 'react-native-elements';
 import {FlatList} from 'react-native-gesture-handler';
+import {useDispatch, useSelector} from 'react-redux';
+
 import AppButton from '../../components/AppButton/AppButton';
 import AppSearchBar from '../../components/AppSearchBar/AppSearchBar';
 
 import LanguagesArr from '../../constants/languages';
 import {COLORS} from '../../styles/color';
 import {FONT_PRIMARY_MEDIUM} from '../../styles/typography';
-import AppStorage from '../../utils/Storage';
-import {APP_LANGUAGE} from '../../constants';
+import {appActions, appSelectors} from '../../stores/slices/appSlice';
 
 const LanguageModalScreen = ({bottomSheetRef}) => {
+  const dispatch = useDispatch();
   const [languages, setLanguages] = useState([]);
-  const [language, setLanguage] = useState({});
-
-  const applyLanguage = () => {
-    bottomSheetRef.current.hide();
-  };
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const language = useSelector(appSelectors.language);
 
   const renderItem = ({item}) => {
     return (
@@ -50,8 +49,6 @@ const LanguageModalScreen = ({bottomSheetRef}) => {
     const tmpLanguagesArr = [...LanguagesArr];
     const selected = tmpLanguagesArr.find(item => item.code === lang.code);
     if (selected) {
-      AppStorage.setItem(APP_LANGUAGE, selected);
-
       const newLanguagesArr = tmpLanguagesArr.map(item => {
         if (item.code === lang.code) {
           return {
@@ -59,21 +56,25 @@ const LanguageModalScreen = ({bottomSheetRef}) => {
             selected: true,
           };
         }
-
         return {
           ...item,
           selected: false,
         };
       });
       setLanguages(newLanguagesArr);
+      setSelectedLanguage(selected);
     }
   };
 
+  const applyLanguage = () => {
+    bottomSheetRef.current.hide();
+    dispatch(appActions.setLanguage(selectedLanguage));
+  };
+
   useEffect(() => {
-    const selected = AppStorage.getItem(APP_LANGUAGE);
     const tmpLanguagesArr = [...LanguagesArr];
     const newLanguagesArr = tmpLanguagesArr.map(item => {
-      if (selected && item.code === selected.code) {
+      if (language && item.code === language.code) {
         return {
           ...item,
           selected: true,
@@ -86,8 +87,7 @@ const LanguageModalScreen = ({bottomSheetRef}) => {
       };
     });
     setLanguages(newLanguagesArr);
-    setLanguage(selected);
-  }, []);
+  }, [language]);
 
   return (
     <ActionSheet
