@@ -1,5 +1,4 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {StyleSheet} from 'react-native';
 import Animated from 'react-native-reanimated';
@@ -10,7 +9,10 @@ import RecipeScreen from '../../screens/Recipe';
 import AppMenuButton from '../../components/AppMenuButton/AppMenuButton';
 import AppNotificationButton from '../../components/AppNotificationButton/AppNotificationButton';
 
-const Stack = createSharedElementStackNavigator();
+const Stack = createSharedElementStackNavigator({
+  name: 'HomeStackNavigator',
+  debug: true,
+});
 // const Stack = createStackNavigator();
 
 const navigationOptions = {
@@ -44,7 +46,12 @@ const HomeStackNavigator = ({style}) => {
           component={RecipeScreen}
           sharedElements={(route, otherRoute, showing) => {
             const {recipe} = route.params;
-            return [`item.${recipe.idMeal}.photo`];
+            return [
+              {
+                id: `item.${recipe.idMeal}.photo`,
+                animation: 'fade',
+              },
+            ];
           }}
         />
       </Stack.Navigator>

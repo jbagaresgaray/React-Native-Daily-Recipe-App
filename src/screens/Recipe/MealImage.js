@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Platform} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import PropTypes from 'prop-types';
 
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   mealImage: {
-    height: 182,
-    borderRadius: 24,
+    height: Platform.OS === 'android' ? 182 : 250,
+    // borderRadius: 24,
   },
 });

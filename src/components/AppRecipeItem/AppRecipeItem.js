@@ -4,6 +4,7 @@ import {AirbnbRating, ListItem} from 'react-native-elements';
 import PropTypes from 'prop-types';
 import {COLORS} from '../../styles/color';
 import FastImage from 'react-native-fast-image';
+import {SharedElement} from 'react-navigation-shared-element';
 import {
   FONT_PRIMARY_MEDIUM,
   FONT_PRIMARY_REGULAR,
@@ -28,13 +29,15 @@ const AppRecipeItem = props => {
       containerStyle={styles.ListItemContainer}
       underlayColor={'transparent'}
       onPress={onPress}>
-      <FastImage
-        style={styles.AppRecipeCardImage}
-        source={{
-          uri: image,
-        }}
-        resizeMode={FastImage.resizeMode.cover}
-      />
+      <SharedElement id={`item.${id}.photo`}>
+        <FastImage
+          style={styles.AppRecipeCardImage}
+          source={{
+            uri: image,
+          }}
+          resizeMode={FastImage.resizeMode.cover}
+        />
+      </SharedElement>
       <ListItem.Content style={styles.ListItemContent}>
         <View style={styles.AppRecipeCardLoveButton}>
           <AppLoveButton selected={isFavorite} onPress={onLikePress} />
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   AppRecipeCardImage: {
-    height: '100%',
+    height: 65,
     width: 75,
     borderRadius: 6,
   },

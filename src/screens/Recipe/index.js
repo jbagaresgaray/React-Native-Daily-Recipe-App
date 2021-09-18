@@ -48,6 +48,7 @@ const RecipeScreen = () => {
           height: 0,
         },
       },
+      headerTransparent: true,
     });
   }, [navigation]);
 
@@ -58,7 +59,6 @@ const RecipeScreen = () => {
       filterMeal(recipe.idMeal, params.action, recipe);
       dispatch(appActions.setRecentlyView(recipe));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   const filterMeal = (id, action, recipe) => {
@@ -117,8 +117,11 @@ const RecipeScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.saferAreaView}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+    <ScrollView contentContainerStyle={styles.scrollView}>
+      <SharedElement id={`item.${meal.idMeal}.photo`}>
+        <MealImage meal={meal} />
+      </SharedElement>
+      <View style={styles.scrollViewContent}>
         <View style={styles.introContainer}>
           <View>
             <Text style={styles.mealCategory}>{meal.strCategory}</Text>
@@ -157,28 +160,25 @@ const RecipeScreen = () => {
             />
           </View>
         </View>
-        <SharedElement id={`item.${meal.idMeal}.photo`}>
-          <MealImage meal={meal} />
-        </SharedElement>
         <RecipeIngredients ingredients={ingredients} />
         <RecipeDirections
           meal={meal}
           ingredients={ingredients}
           recipeRef={actionSheetRef}
         />
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+    </ScrollView>
   );
 };
 
 export default RecipeScreen;
 
 const styles = StyleSheet.create({
-  saferAreaView: {
+  scrollView: {
     flex: 1,
     backgroundColor: '#F5F5F5',
   },
-  scrollView: {
+  scrollViewContent: {
     flex: 1,
     paddingStart: 20,
     paddingEnd: 20,
