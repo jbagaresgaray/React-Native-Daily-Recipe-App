@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {COLORS} from '../../styles/color';
 
 import RecentlyViewedScreen from '../../screens/RecentlyViewed';
@@ -10,7 +10,11 @@ import {StyleSheet} from 'react-native';
 import AppMenuButton from '../../components/AppMenuButton/AppMenuButton';
 import AppNotificationButton from '../../components/AppNotificationButton/AppNotificationButton';
 
-const Stack = createStackNavigator();
+const Stack = createSharedElementStackNavigator({
+  name: 'RecentlyViewedStackNavigator',
+  debug: true,
+});
+
 const navigationOptions = {
   gestureEnabled: false,
   headerStyle: {
@@ -40,7 +44,19 @@ const RecentlyViewedStackNavigator = ({style}) => {
           component={RecentlyViewedScreen}
         />
         <Stack.Screen name="Notification" component={NotificationsScreen} />
-        <Stack.Screen name="Recipe" component={RecipeScreen} />
+        <Stack.Screen
+          name="Recipe"
+          component={RecipeScreen}
+          sharedElements={(route, otherRoute, showing) => {
+            const {recipe} = route.params;
+            return [
+              {
+                id: `item.${recipe.idMeal}.photo`,
+                animation: 'fade',
+              },
+            ];
+          }}
+        />
       </Stack.Navigator>
     </Animated.View>
   );
