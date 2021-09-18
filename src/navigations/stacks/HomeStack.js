@@ -1,5 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import {StyleSheet} from 'react-native';
 import Animated from 'react-native-reanimated';
 import HomeScreen from '../../screens/Home';
@@ -9,11 +10,19 @@ import RecipeScreen from '../../screens/Recipe';
 import AppMenuButton from '../../components/AppMenuButton/AppMenuButton';
 import AppNotificationButton from '../../components/AppNotificationButton/AppNotificationButton';
 
-const Stack = createStackNavigator();
+const Stack = createSharedElementStackNavigator();
+// const Stack = createStackNavigator();
+
 const navigationOptions = {
   gestureEnabled: false,
   headerStyle: {
     backgroundColor: COLORS.white,
+    shadowColor: 'transparent',
+    shadowRadius: 0,
+    shadowOffset: {
+      height: 0,
+    },
+    elevation: 0,
   },
   headerBackTitleVisible: false,
   headerTintColor: COLORS.black,
@@ -30,7 +39,14 @@ const HomeStackNavigator = ({style}) => {
         screenOptions={navigationOptions}>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="Notification" component={NotificationsScreen} />
-        <Stack.Screen name="Recipe" component={RecipeScreen} />
+        <Stack.Screen
+          name="Recipe"
+          component={RecipeScreen}
+          sharedElements={(route, otherRoute, showing) => {
+            const {recipe} = route.params;
+            return [`item.${recipe.idMeal}.photo`];
+          }}
+        />
       </Stack.Navigator>
     </Animated.View>
   );

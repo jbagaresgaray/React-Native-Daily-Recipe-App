@@ -3,6 +3,7 @@ import React, {createRef, useEffect, useLayoutEffect, useState} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import {AirbnbRating} from 'react-native-elements';
 import {useDispatch, useSelector} from 'react-redux';
+import {SharedElement} from 'react-navigation-shared-element';
 
 import {COLORS} from '../../styles/color';
 import {
@@ -39,6 +40,14 @@ const RecipeScreen = () => {
     navigation.setOptions({
       headerLeft: () => <AppBackButton />,
       headerRight: () => <AppNotificationButton />,
+      headerStyle: {
+        backgroundColor: '#F5F5F5',
+        shadowColor: 'transparent',
+        shadowRadius: 0,
+        shadowOffset: {
+          height: 0,
+        },
+      },
     });
   }, [navigation]);
 
@@ -148,7 +157,9 @@ const RecipeScreen = () => {
             />
           </View>
         </View>
-        <MealImage meal={meal} />
+        <SharedElement id={`item.${meal.idMeal}.photo`}>
+          <MealImage meal={meal} />
+        </SharedElement>
         <RecipeIngredients ingredients={ingredients} />
         <RecipeDirections
           meal={meal}

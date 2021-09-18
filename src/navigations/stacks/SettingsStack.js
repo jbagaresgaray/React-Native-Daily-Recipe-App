@@ -13,6 +13,12 @@ const navigationOptions = {
   gestureEnabled: false,
   headerStyle: {
     backgroundColor: COLORS.white,
+    shadowColor: 'transparent',
+    shadowRadius: 0,
+    shadowOffset: {
+      height: 0,
+    },
+    elevation: 0,
   },
   headerBackTitleVisible: false,
   headerTintColor: COLORS.black,

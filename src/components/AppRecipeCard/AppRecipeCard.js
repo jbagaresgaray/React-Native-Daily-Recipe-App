@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {AirbnbRating} from 'react-native-elements';
 import PropTypes from 'prop-types';
+import {SharedElement} from 'react-navigation-shared-element';
 
 import {COLORS} from '../../styles/color';
 import {
@@ -41,13 +42,15 @@ const AppRecipeCard = ({
           <AppLoveButton selected={isFavorite} onPress={onLikePress} />
         </View>
         <View style={styles.AppRecipeCardImageContainer}>
-          <FastImage
-            style={styles.AppRecipeCardImage}
-            source={{
-              uri: image,
-            }}
-            resizeMode={FastImage.resizeMode.cover}
-          />
+          <SharedElement id={`item.${id}.photo`}>
+            <FastImage
+              style={styles.AppRecipeCardImage}
+              source={{
+                uri: image,
+              }}
+              resizeMode={FastImage.resizeMode.cover}
+            />
+          </SharedElement>
         </View>
       </View>
       <View style={styles.AppRecipeCardContent}>
